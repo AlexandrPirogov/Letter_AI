@@ -4,30 +4,32 @@
 class Neuron {
 public:
 	float axon;
-	int* sinopsis;
+	int sinopsis[10][10];
+	std::string symbol;
+
 	Neuron(int M, int N) {
-		sinopsis = new int[M * N];
-		for(int i = 0; i < M*N; i++)
-			sinopsis[i] = 0;
 		this->axon = 0;
+		for (int i = 0; i < 10; i++) {
+			for (int j = 0; j < 10; j++) {
+				this->weights[i][j] = 0;
+				this->sinopsis[i][j] = 0;
+			}
+		}
 	};
 
-	void readFile(std::ifstream& ifs);
+	void read_file(std::ifstream& ifs);
 
-	float getAxon();
+	void write_weights(std::ofstream& ofs);
 
+	void read_weights(std::ifstream& ifs);
+
+	void update_weigts();
+
+	bool getAxon();
+	float weights[10][10];
 private:
-	const float weights[10][10] = { 
-		{1,1,1,1,1,1,1,1,1,0.8},
-		{1,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,1},
-		{1, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.9, 1},
-		{1,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,1},
-		{1,0.7,0.7,0.7,0.7,0.7,0.7,0.7,0.7,0.9},
-	};
-
+	 
+	 
+	 void decrease_weights();
+	 void increase_weights();
 };
